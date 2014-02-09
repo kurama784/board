@@ -1,0 +1,20 @@
+{% extends "boards/static_base.html" %}
+
+{% load i18n %}
+
+{% block head %}
+    <title>{% trans "Syntax" %}</title>
+{% endblock %}
+
+{% block staticcontent %}
+    <h2>{% trans 'Syntax' %}</h2>
+    <p>{% trans '2 line breaks for a new line.' %}</p>
+    <p>_<i>{% trans 'Italic text' %}</i>_</p>
+    <p>__<b>{% trans 'Bold text' %}</b>__</p>
+    <p>%%<span class="spoiler">{% trans 'Spoiler' %}</span>%%</p>
+    <p><a>>>123</a> -- {% trans 'Link to a post' %}</p>
+    <p>~<span class="strikethrough">{% trans 'Strikethrough text' %}</span>~</p>
+    <p>{% trans 'You need to new line before:' %}</p>
+    <p><span class="comment">//{% trans 'Comment' %}</span></p>
+    <p><span class="quote">> {% trans 'Quote' %}</span></p>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% load staticfiles %}
+{% load i18n %}
+{% load l10n %}
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'css/base.css' %}" media="all"/>
+    <link rel="stylesheet" type="text/css"
+	href="{% static theme_css %}" media="all"/>
+    <link rel="alternate" type="application/rss+xml" href="rss/" title=
+	"{% trans 'Feed' %}"/>
+
+    <link rel="icon" type="image/png"
+        href="{% static 'favicon.png' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8"/>
+
+[<a class="tag" href="http://127.0.0.1:8000/tag/бред"
+                >Бред</a>]
+[<a class="tag" href="http://127.0.0.1:8000/tag/истории"
+                >Истории</a>]
+[<a class="tag" href="http://127.0.0.1:8000/tag/аниме"
+                >Аниме</a>]
+[<a class="tag" href="http://127.0.0.1:8000/tag/учеба"
+                >Учеба</a>]
+[<a class="tag" href="http://127.0.0.1:8000/tag/творчество"
+                >Творчество</a>]
+
+
+{% if random_banners %}
+{% for item in random_banners %}
+<p><center><img src = "{{ item.address }}"></p></center>
+{% endfor %}
+{% else %}
+<p><span>No random banners</span></center>
+{% endif %}
+    {% block head %}{% endblock %}
+</head>
+<body>
+<script src="{% static 'js/jquery-2.0.1.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui-1.10.3.custom.min.js' %}"></script>
+<script src="{% static 'js/jquery.mousewheel.js' %}"></script>
+<script src="{% url 'js_info_dict' %}"></script>
+
+<div class="navigation_panel">
+    <a class="link" href="/boards">{% trans "All threads" %}</a>
+    {% for tag in tags %}
+        <a class="tag" href="{% url 'tag' tag_name=tag.name %}"
+                >#{{ tag.name }}</a>,
+    {% endfor %}
+    <a href="{% url 'tags' %}" title="{% trans 'Tag management' %}"
+            >[...]</a>
+    <a class="link" href="{% url 'settings' %}">{% trans 'Settings' %}</a>
+</div>
+
+{% block content %}{% endblock %}
+
+<script src="{% static 'js/popup.js' %}"></script>
+<script src="{% static 'js/image.js' %}"></script>
+<script src="{% static 'js/refpopup.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<div class="navigation_panel">
+    {% block metapanel %}{% endblock %}
+    [<a href="{% url "login" %}">{% trans 'Login' %}</a>]
+    [<a href="{% url "archive" %}">{% trans 'Archive' %}</a>]
+    {% with ppd=posts_per_day %}
+        {% blocktrans %}Speed: {{ ppd }} posts per day{% endblocktrans %}
+    {% endwith %}
+    <a class="link" href="#top">{% trans 'Up' %}</a>
+</div>
+
+<div class="footer">
+    <!-- Put your banners here -->
+</div>
+
+</body>
+</html>

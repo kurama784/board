@@ -1,0 +1,12 @@
+@import url("../md/base_page.css");
+
+.thread, .post-form-w, .image-mode-tab, .tag_info, .bar-bg, .page_link, .post_preview {
+    max-width: 1000px;                                                                
+    margin-left: auto;                                                                
+    margin-right: auto;                                                               
+}
+
+.thread {
+    border-left: solid 2px #888;                                                      
+    border-right: solid 2px #888;
+}

@@ -1,0 +1,13 @@
+{% extends "boards/static_base.html" %}
+
+{% load i18n %}
+
+{% block head %}
+    <title>{% trans "Banned" %}</title>
+{% endblock %}
+
+{% block staticcontent %}
+    <p><img src="{{ STATIC_URL }}images/banned.png" width="200" /></p>
+    <p>{% trans 'Your IP address has been banned. Contact the administrator' %}</p>
+    <p>{{ ban_reason }}</p>
+{% endblock %}

@@ -1,0 +1,32 @@
+.ui-button {
+   display: none;
+}
+
+.ui-dialog-content {
+    padding: 0;
+    min-height: 0;
+}
+
+.mark_btn {
+    cursor: pointer;
+}
+
+.img-full {
+    position: fixed;
+    background-color: #CCC;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
+
+.post_preview {
+    z-index: 300;
+    position:absolute;
+}
+
+.gallery_image {
+    display: inline-block;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!-- saved from url=(0024)http://anon.fm/info.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Riku-chan</title>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/photon.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/info.css">
+<link rel="alternate" type="application/rss+xml" title="Zapeeseee" ref="/podcast.xml">
+
+
+<style>
+#counter{background:black;padding:5px;float:left;}
+#counter img{background:#ffc610;border:0px;}
+.hurtbox{background-color:#333; padding:3px; border: 1px #eee dashed;}
+.disabled{display:none;}
+#bh{padding:0px 0px;margin:10px auto;display:block;width:350px;overflow:hidden; background:#fff; border:1px solid #ccc;border-radius:10px}
+#bhd .holder{display:inline-block;}
+#age{color:white;font-size:15px;float:right;background:#c00;border-radius:5px;margin:0px 0px 0px 20px;padding:2px;}
+#shed{margin:5px auto;width:90%;}
+#shed table{border-collapse:collapse;width:100%;}
+#shed span{display:block;color:#aaa;font-size:70%;white-space: nowrap;}
+#shed div{font-size:80%;}
+#shed td{text-align:center;}
+#shed .now{background:#800;color:white;}
+#shed .old{color:#888;}
+#shed .new{color:#800;}
+#podcasts, #radiochan{height:400px;overflow-y:scroll;overflow-x:hidden;border:1px solid #BBB;background-color:#fcfcfc;border-radius:10px;
+font-size:10px;
+font-family:sans-serif;
+text-align:left;
+margin-top:3px;
+}
+#radiochan .msgtime{color:#888;}
+#radiochan .somemsg_id{color:#467ea6;font-weight:bold;}
+#down2{overflow:auto;}
+#downstat{height:110px;overflow:auto;}
+#downstat tr{font-size:11px;}
+
+</style>
+<style type="text/css"></style></head><body>
+<img src="{{ STATIC_URL }}icons/A-Z/O/Ore no Imouto ga Konna ni Kawaii Wake ga Na_3.ico" width="168" height = "168" style="position:relative;float:left;top:20px;left:500px;cursor:pointer;"">
+
+
+<div id="age" title="Посещение сайта только для людей от 666 лет" style="display: block;">666+</div>
+<div id="clock" style="display: block;">{{ time_now }}</div>
+<div style="clear:both;"></div>
+<div class="ballon"><b>Рику-чан</b> - это форум для свободного общения через интернет в формате <a href=#>имиджборды</a>. Каждый имеет право выражать свою
+точку зрения <b>без ограничения</b>, достаточно соблюдать несколько простых <a href=#>правил</a>. Добро пожаловать <s>снова</s> домой.</a></div>
+
+
+<div id="infoban">
+<center>
+
+{% for item in top_image %}
+<div id="splashHolder" style="display: block;"><img id="splash" title="{{ item.title }}" src="{{ item.address }}"></a></div>
+{% endfor %}
+
+
+<!--div id="bh"></div>-->
+
+<a name="fanc"></a>
+<div class="feeds">
+<div id="kookareque" "><h1>Новости</h1>
+{% if news %}
+{% for item in news %}
+<p><span class="user_id">Император-кун</span> - <span class="timestamp">{{ item.pub_time }}</span> - <span class="userpost">{{ item.title }}</span><br>{{ item.text }}<br>
+{% endfor %}
+{% else %}
+<p><span class="userpost">Новостей нет</p>
+<a href="http://www.rudata.ru/w/images/3/3f/Shevchenko_Kateryna_Olia_1842.jpg" target="_blank"><img src="13917081698893.jpg"></a>
+{% endif %}
+</div>
+</div>
+
+
+<div id="newsfeed" class="";"><h1>Change&nbsp;Log</h1>
+
+<p>[21:38] Открытие борды</p>
+
+<p>[21:40] Fix captcha </p>
+
+<p>[21:55] Добавлены баннеры.</p>
+</div>
+
+</tbody></table></div>
+</div>
+
+{% for item in second_image %}
+<div id="bedj" style="display: block;">
+<center>
+<img src="{{ item.address }}" title ="{{ item.title }}">
+</center>
+</div>
+{% endfor %}
+
+<p><div id="warn" style="display: block;">
+{% for item in footer_news %}
+<h1>{{ item.title }}</h1> {{ item.text }}
+{% endfor %}
+</div>
+
+<br><br>
+<br><br>
+<div id="links" style="display: block;">
+<a href="/" target="_top">Riku-Chan</a>, <span>рады всем.</span></div>
+<img id="by" src="http://oyster.ignimgs.com/social/avatars/users2/45/5533734-1382158554.png" align="right" style="display: block;">
+
+</body></html>

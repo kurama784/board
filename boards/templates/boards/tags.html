@@ -1,0 +1,34 @@
+{% extends "boards/base.html" %}
+
+{% load i18n %}
+{% load cache %}
+
+{% block head %}
+    <title>Neboard - {% trans "Tags" %}</title>
+{% endblock %}
+
+{% block content %}
+
+{% cache 600 all_tags_list %}
+    <div class="post">
+        {% if all_tags %}
+            {% for tag in all_tags %}
+                <div class="tag_item" style="opacity: {{ tag.get_font_value }}">
+                {% if tag in user.fav_tags.all %}
+                    <a href="{% url 'tag' tag.name %}?method=unsubscribe&next={{ request.path }}"
+                        class="fav">★</a>
+                {% else %}
+                    <a href="{% url 'tag' tag.name %}?method=subscribe&next={{ request.path }}"
+                        class="not_fav">★</a>
+                {% endif %}
+                <a class="tag" href="{% url 'tag' tag.name %}">
+                #{{ tag.name }}</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% trans 'No tags found.' %}
+        {% endif %}
+    </div>
+{% endcache %}
+
+{% endblock %}

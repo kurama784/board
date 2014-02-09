@@ -1,0 +1,184 @@
+{% extends "boards/base.html" %}
+
+{% load i18n %}
+{% load cache %}
+{% load board %}
+{% load static %}
+
+{% block head %}
+    {% if tag %}
+        <title>{{ tag.name }} - {{ site_name }}</title>
+    {% else %}
+        <title>{{ site_name }}</title>
+    {% endif %}
+
+    {% if current_page.has_previous %}
+        <link rel="prev" href="
+            {% if tag %}
+                {% url "tag" tag_name=tag page=current_page.previous_page_number %}
+            {% elif archived %}
+                {% url "archive" page=current_page.previous_page_number %}
+            {% else %}
+                {% url "index" page=current_page.previous_page_number %}
+            {% endif %}
+        " />
+    {% endif %}
+    {% if current_page.has_next %}
+        <link rel="next" href="
+            {% if tag %}
+                {% url "tag" tag_name=tag page=current_page.next_page_number %}
+            {% elif archived %}
+                {% url "archive" page=current_page.next_page_number %}
+            {% else %}
+                {% url "index" page=current_page.next_page_number %}
+            {% endif %}
+        " />
+    {% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% get_current_language as LANGUAGE_CODE %}
+
+{% if tag %}
+    <div class="tag_info">
+        <h2>
+            {% if tag in user.fav_tags.all %}
+                <a href="{% url 'tag' tag.name %}?method=unsubscribe&next={{ request.path }}"
+                   class="fav">★</a>
+            {% else %}
+                <a href="{% url 'tag' tag.name %}?method=subscribe&next={{ request.path }}"
+                   class="not_fav">★</a>
+            {% endif %}
+            #{{ tag.name }}
+        </h2>
+    </div>
+{% endif %}
+
+    {% if threads %}
+        {% if current_page.has_previous %}
+            <div class="page_link">
+                <a href="
+            {% if tag %}
+                {% url "tag" tag_name=tag page=current_page.previous_page_number %}
+            {% elif archived %}
+                {% url "archive" page=current_page.previous_page_number %}
+            {% else %}
+                {% url "index" page=current_page.previous_page_number %}
+            {% endif %}
+                ">{% trans "Previous page" %}</a>
+            </div>
+        {% endif %}
+
+        {% for thread in threads %}
+            {% cache 600 thread_short thread.id thread.last_edit_time moderator LANGUAGE_CODE %}
+            <div class="thread">
+                {% with can_bump=thread.can_bump %}
+                {% post_view thread.get_opening_post moderator is_opening=True thread=thread can_bump=can_bump truncated=True need_open_link=True %}
+                {% if not thread.archived %}
+                {% if thread.get_last_replies.exists %}
+                    {% if thread.get_skipped_replies_count %}
+                        <div class="skipped_replies">
+                            <a href="{% url 'thread' thread.get_opening_post.id %}">
+                                {% blocktrans with count=thread.get_skipped_replies_count %}Skipped {{ count }} replies. Open thread to see all replies.{% endblocktrans %}
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div class="last-replies">
+                        {% for post in thread.get_last_replies %}
+                            {% post_view post moderator=moderator is_opening=False thread=thread can_bump=can_bump truncated=True %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endif %}
+                {% endwith %}
+        </div>
+        {% endcache %}
+        {% endfor %}
+
+        {% if current_page.has_next %}
+            <div class="page_link">
+                <a href="
+            {% if tag %}
+                {% url "tag" tag_name=tag page=current_page.next_page_number %}
+            {% elif archived %}
+                {% url "archive" page=current_page.next_page_number %}
+            {% else %}
+                {% url "index" page=current_page.next_page_number %}
+            {% endif %}
+                ">{% trans "Next page" %}</a>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="post">
+            {% trans 'No threads exist. Create the first one!' %}</div>
+    {% endif %}
+
+    <div class="post-form-w">
+        <script src="{% static 'js/panel.js' %}"></script>
+        <div class="post-form">
+            <div class="form-title">{% trans "Create new thread" %}</div>
+            <form enctype="multipart/form-data" method="post">{% csrf_token %}
+                {{ form.as_div }}
+                <div class="form-submit">
+                    <input type="submit" value="{% trans "Post" %}"/>
+                </div>
+            </form>
+            <div>
+                {% trans 'Tags must be delimited by spaces. Text or image is required.' %}
+		<p><span>Каждая тема имеет определенные теги, основные теги для удобства приведены вверху. 
+			<p><span>Но вы можете указывать любые теги для своих тем.</span>
+            </div>
+            <div><a href="{% url "staticpage" name="help" %}">
+                {% trans 'Text syntax' %}</a></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block metapanel %}
+
+    <span class="metapanel">
+        <b><a href="{% url "authors" %}">{{ site_name }}</a> {{ version }}</b>
+        {% trans "Pages:" %}
+        <a href="
+            {% if tag %}
+                {% url "tag" tag_name=tag page=paginator.page_range|first %}
+            {% elif archived %}
+                {% url "archive" page=paginator.page_range|first %}
+            {% else %}
+                {% url "index" page=paginator.page_range|first %}
+            {% endif %}
+        ">&lt;&lt;</a>
+        [
+        {% for page in paginator.center_range %}
+            <a
+                {% ifequal page current_page.number %}
+                    class="current_page"
+                {% endifequal %}
+                href="
+            {% if tag %}
+                {% url "tag" tag_name=tag page=page %}
+            {% elif archived %}
+                {% url "archive" page=page %}
+            {% else %}
+                {% url "index" page=page %}
+            {% endif %}
+            ">{{ page }}</a>
+            {% if not forloop.last %},{% endif %}
+        {% endfor %}
+        ]
+        <a href="
+            {% if tag %}
+                {% url "tag" tag_name=tag page=paginator.page_range|last %}
+            {% elif archived %}
+                {% url "archive" page=paginator.page_range|last %}
+            {% else %}
+                {% url "index" page=paginator.page_range|last %}
+            {% endif %}
+        ">&gt;&gt;</a>
+        [<a href="rss/">RSS</a>]
+    </span>
+
+{% endblock %}

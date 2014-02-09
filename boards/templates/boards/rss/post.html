@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% if obj.image %}
+<img src="{{ obj.image.url_200x150 }}"
+        alt="{% trans 'Post image' %}" />
+{% endif %}
+{{ obj.text.rendered|safe }}
+{%  if obj.tags.all %}
+    <p>
+        {% trans 'Tags' %}:
+        {% for tag in obj.tags.all %}
+            {{ tag.name }}
+        {% endfor %}
+    </p>
+{% endif %}

@@ -1,0 +1,65 @@
+{% extends "boards/base.html" %}
+
+{% load i18n %}
+{% load cache %}
+{% load static from staticfiles %}
+{% load board %}
+
+{% block head %}
+    <title>{{ thread.get_opening_post.get_title|striptags|truncatewords:10 }}
+        - {{ site_name }}</title>
+{% endblock %}
+
+{% block content %}
+    {% spaceless %}
+    {% get_current_language as LANGUAGE_CODE %}
+
+    <script src="{% static 'js/thread.js' %}"></script>
+
+    {% cache 600 thread_gallery_view thread.id thread.last_edit_time LANGUAGE_CODE request.get_host %}
+    <div class="image-mode-tab">
+        <a href="{% url 'thread' thread.get_opening_post.id %}">{% trans 'Normal mode' %}</a>,
+        <a class="current_mode" href="{% url 'thread_mode' thread.get_opening_post.id 'gallery' %}">{% trans 'Gallery mode' %}</a>
+    </div>
+
+    <div id="posts-table">
+    {% for post in posts %}
+        <div class="gallery_image">
+            <div>
+                <a
+                        class="thumb"
+                        href="{{ post.image.url }}"><img
+                        src="{{ post.image.url_200x150 }}"
+                        alt="{{ post.id }}"
+                        width="{{ post.image_pre_width }}"
+                        height="{{ post.image_pre_height }}"
+                        data-width="{{ post.image_width }}"
+                        data-height="{{ post.image_height }}"/>
+                </a>
+            </div>
+            <div class="gallery_image_metadata">
+                {{ post.image_width }}x{{ post.image_height }}
+                {% image_actions post.image.url request.get_host %}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    {% endcache %}
+
+    {% endspaceless %}
+{% endblock %}
+
+{% block metapanel %}
+
+    {% get_current_language as LANGUAGE_CODE %}
+
+    <span class="metapanel" data-last-update="{{ last_update }}">
+        {% cache 600 thread_meta thread.last_edit_time moderator LANGUAGE_CODE %}
+            <span id="reply-count">{{ thread.get_reply_count }}</span> {% trans 'replies' %},
+            <span id="image-count">{{ thread.get_images_count }}</span> {% trans 'images' %}.
+            {% trans 'Last update: ' %}{{ thread.last_edit_time }}
+            [<a href="rss/">RSS</a>]
+        {% endcache %}
+    </span>
+
+{% endblock %}

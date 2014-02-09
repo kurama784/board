@@ -1,0 +1,99 @@
+{% load i18n %}
+{% load board %}
+{% load cache %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% spaceless %}
+    {% cache 600 post post.id post.last_edit_time thread.archived bumpable truncated moderator LANGUAGE_CODE need_open_link %}
+        {% if thread.archived %}
+            <div class="post archive_post" id="{{ post.id }}">
+        {% elif bumpable %}
+            <div class="post" id="{{ post.id }}">
+        {% else %}
+            <div class="post dead_post" id="{{ post.id }}">
+        {% endif %}
+
+        {% if post.image %}
+            <div class="image">
+                <a
+                        class="thumb"
+                        href="{{ post.image.url }}"><img
+                        src="{{ post.image.url_200x150 }}"
+                        alt="{{ post.id }}"
+                        width="{{ post.image_pre_width }}"
+                        height="{{ post.image_pre_height }}"
+                        data-width="{{ post.image_width }}"
+                        data-height="{{ post.image_height }}"/>
+                </a>
+            </div>
+        {% endif %}
+        <div class="message">
+            <div class="post-info">
+                <span class="title">{{ post.title }}</span>
+                <a class="post_id" href="{% post_object_url post thread=thread %}">
+                    ({{ post.id }}) </a>
+                [<span class="pub_time">{{ post.pub_time }}</span>]
+                {% if thread.archived %}
+                    — [{{ thread.bump_time }}]
+                {% endif %}
+                {% if not truncated and not thread.archived %}
+                    [<a href="#" onclick="javascript:addQuickReply('{{ post.id }}')
+                        ; return false;">&gt;&gt;</a>]
+                {% endif %}
+                {% if is_opening and need_open_link %}
+                    {% if thread.archived %}
+                        [<a class="link" href="{% url 'thread' post.id %}">{% trans "Open" %}</a>]
+                    {% else %}
+                        [<a class="link" href="{% url 'thread' post.id %}#form">{% trans "Reply" %}</a>]
+                    {% endif %}
+                {% endif %}
+
+                {% if moderator %}
+                    <span class="moderator_info">
+                        [<a href="{% url 'post_admin' post_id=post.id %}"
+                            >{% trans 'Edit' %}</a>]
+                        [<a href="{% url 'delete' post_id=post.id %}"
+                            >{% trans 'Delete' %}</a>]
+                        ({{ post.poster_ip }})
+                        [<a href="{% url 'ban' post_id=post.id %}?next={{ request.path }}"
+                            >{% trans 'Ban IP' %}</a>]
+                    </span>
+                {% endif %}
+            </div>
+            {% autoescape off %}
+                {% if truncated %}
+                    {{ post.text.rendered|truncatewords_html:50 }}
+                {% else %}
+                    {{ post.text.rendered }}
+                {% endif %}
+            {% endautoescape %}
+            {% with refposts=post.get_sorted_referenced_posts %}
+                {% if refposts %}
+                    <div class="refmap">
+                        {% trans "Replies" %}:
+                        {% for ref_post in refposts %}
+                            <a href="{% post_object_url ref_post thread=thread %}">&gt;&gt;{{ ref_post.id }}</a>{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    {% endcache %}
+        {% if is_opening %}
+        {% cache 600 post_thread thread.id thread.last_edit_time LANGUAGE_CODE need_open_link %}
+            <div class="metadata">
+                {% if is_opening and need_open_link %}
+                    {{ thread.get_images_count }} {% trans 'images' %}.
+                {% endif %}
+                <span class="tags">
+                    {% for tag in thread.get_tags %}
+                        <a class="tag" href="{% url 'tag' tag.name %}">
+                            #{{ tag.name }}</a>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </span>
+            </div>
+        {% endcache %}
+        {% endif %}
+        </div>
+{% endspaceless %}

@@ -1,0 +1,88 @@
+{% extends "boards/base.html" %}
+
+{% load i18n %}
+{% load cache %}
+{% load static from staticfiles %}
+{% load board %}
+
+{% block head %}
+    <title>{{ opening_post.get_title|striptags|truncatewords:10 }}
+        - {{ site_name }}</title>
+{% endblock %}
+
+{% block content %}
+    {% spaceless %}
+    {% get_current_language as LANGUAGE_CODE %}
+
+    {% cache 600 thread_view thread.id thread.last_edit_time moderator LANGUAGE_CODE %}
+
+    <div class="image-mode-tab">
+        <a class="current_mode" href="{% url 'thread' opening_post.id %}">{% trans 'Normal mode' %}</a>,
+        <a href="{% url 'thread_mode' opening_post.id 'gallery' %}">{% trans 'Gallery mode' %}</a>
+    </div>
+
+    {% if bumpable %}
+        <div class="bar-bg">
+            <div class="bar-value" style="width:{{ bumplimit_progress }}%" id="bumplimit_progress">
+            </div>
+            <div class="bar-text">
+                <span id="left_to_limit">{{ posts_left }}</span> {% trans 'posts to bumplimit' %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="thread">
+        {% with can_bump=thread.can_bump %}
+        {% for post in thread.get_replies %}
+            {% if forloop.first %}
+                {% post_view post moderator=moderator is_opening=True thread=thread can_bump=can_bump opening_post_id=opening_post.id %}
+            {% else %}
+                {% post_view post moderator=moderator is_opening=False thread=thread can_bump=can_bump opening_post_id=opening_post.id %}
+            {% endif %}
+        {% endfor %}
+        {% endwith %}
+    </div>
+
+    {% if not thread.archived %}
+
+    <div class="post-form-w">
+        <script src="{% static 'js/panel.js' %}"></script>
+        <div class="form-title">{% trans "Reply to thread" %} #{{ opening_post.id }}</div>
+        <div class="post-form">
+            <form id="form" enctype="multipart/form-data" method="post"
+                    >{% csrf_token %}
+                {{ form.as_div }}
+                <div class="form-submit">
+                    <input type="submit" value="{% trans "Post" %}"/>
+                </div>
+            </form>
+            <div><a href="{% url "staticpage" name="help" %}">
+                {% trans 'Text syntax' %}</a></div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/jquery.form.min.js' %}"></script>
+    <script src="{% static 'js/thread_update.js' %}"></script>
+    {% endif %}
+
+    <script src="{% static 'js/thread.js' %}"></script>
+
+    {% endcache %}
+
+    {% endspaceless %}
+{% endblock %}
+
+{% block metapanel %}
+
+    {% get_current_language as LANGUAGE_CODE %}
+
+    <span class="metapanel" data-last-update="{{ last_update }}">
+        {% cache 600 thread_meta thread.last_edit_time moderator LANGUAGE_CODE %}
+            <span id="reply-count">{{ thread.get_reply_count }}</span> {% trans 'replies' %},
+            <span id="image-count">{{ thread.get_images_count }}</span> {% trans 'images' %}.
+            {% trans 'Last update: ' %}<span id="last-update">{{ thread.last_edit_time }}</span>
+            [<a href="rss/">RSS</a>]
+        {% endcache %}
+    </span>
+
+{% endblock %}

@@ -1,0 +1,370 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-22 13:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: authors.py:5
+msgid "author"
+msgstr "автор"
+
+#: authors.py:6
+msgid "developer"
+msgstr "разработчик"
+
+#: authors.py:7
+msgid "javascript developer"
+msgstr "разработчик javascript"
+
+#: authors.py:8
+msgid "designer"
+msgstr "дизайнер"
+
+#: forms.py:21
+msgid ""
+"Type message here. You can reply to message >>123 like\n"
+" this. 2 new lines are required to start new paragraph."
+msgstr ""
+"Введите сообщение здесь. Вы можете ответить на сообщение >>123 вот так. 2 "
+"переноса строки обязательны для создания нового абзаца."
+
+#: forms.py:23
+msgid "tag1 several_words_tag"
+msgstr "тег1 тег_из_нескольких_слов"
+
+#: forms.py:25
+msgid "Such image was already posted"
+msgstr "Такое изображение уже было загружено"
+
+#: forms.py:27
+msgid "Title"
+msgstr "Заголовок"
+
+#: forms.py:28
+msgid "Text"
+msgstr "Текст"
+
+#: forms.py:29
+msgid "Tag"
+msgstr "Тег"
+
+#: forms.py:106
+msgid "Image"
+msgstr "Изображение"
+
+#: forms.py:109
+msgid "e-mail"
+msgstr ""
+
+#: forms.py:120
+#, python-format
+msgid "Title must have less than %s characters"
+msgstr "Заголовок должен иметь меньше %s символов"
+
+#: forms.py:129
+#, python-format
+msgid "Text must have less than %s characters"
+msgstr "Текст должен быть короче %s символов"
+
+#: forms.py:140
+#, python-format
+msgid "Image must be less than %s bytes"
+msgstr "Изображение должно быть менее %s байт"
+
+#: forms.py:175
+msgid "Either text or image must be entered."
+msgstr "Текст или картинка должны быть введены."
+
+#: forms.py:188
+#, python-format
+msgid "Wait %s seconds after last posting"
+msgstr "Подождите %s секунд после последнего постинга"
+
+#: forms.py:204 templates/boards/tags.html:6 templates/boards/rss/post.html:10
+msgid "Tags"
+msgstr "Теги"
+
+#: forms.py:212 forms.py:331
+msgid "Inappropriate characters in tags."
+msgstr "Недопустимые символы в тегах."
+
+#: forms.py:240 forms.py:261
+msgid "Captcha validation failed"
+msgstr "Проверка капчи провалена"
+
+#: forms.py:267
+msgid "Theme"
+msgstr "Тема"
+
+#: forms.py:272
+msgid "Enable moderation panel"
+msgstr "Включить панель модерации"
+
+#: forms.py:287
+msgid "No such user found"
+msgstr "Данный пользователь не найден"
+
+#: forms.py:301
+#, python-format
+msgid "Wait %s minutes after last login"
+msgstr "Подождите %s минут после последнего входа"
+
+#: templates/boards/404.html:6
+msgid "Not found"
+msgstr "Не найдено"
+
+#: templates/boards/404.html:12
+msgid "This page does not exist"
+msgstr "Этой страницы не существует"
+
+#: templates/boards/authors.html:6 templates/boards/authors.html.py:12
+msgid "Authors"
+msgstr "Авторы"
+
+#: templates/boards/authors.html:26
+msgid "Distributed under the"
+msgstr "Распространяется под"
+
+#: templates/boards/authors.html:28
+msgid "license"
+msgstr "лицензией"
+
+#: templates/boards/authors.html:30
+msgid "Repository"
+msgstr "Репозиторий"
+
+#: templates/boards/base.html:14
+msgid "Feed"
+msgstr "Лента"
+
+#: templates/boards/base.html:31
+msgid "All threads"
+msgstr "Все темы"
+
+#: templates/boards/base.html:36
+msgid "Tag management"
+msgstr "Управление тегами"
+
+#: templates/boards/base.html:38 templates/boards/settings.html:7
+msgid "Settings"
+msgstr "Настройки"
+
+#: templates/boards/base.html:50 templates/boards/login.html:6
+#: templates/boards/login.html.py:21
+msgid "Login"
+msgstr "Вход"
+
+#: templates/boards/base.html:51
+msgid "Archive"
+msgstr "Архив"
+
+#: templates/boards/base.html:53
+#, python-format
+msgid "Speed: %(ppd)s posts per day"
+msgstr "Скорость: %(ppd)s сообщений в день"
+
+#: templates/boards/base.html:55
+msgid "Up"
+msgstr "Вверх"
+
+#: templates/boards/login.html:15
+msgid "User ID"
+msgstr "ID пользователя"
+
+#: templates/boards/login.html:24
+msgid "Insert your user id above"
+msgstr "Вставьте свой ID пользователя выше"
+
+#: templates/boards/post.html:47
+msgid "Open"
+msgstr "Открыть"
+
+#: templates/boards/post.html:49
+msgid "Reply"
+msgstr "Ответ"
+
+#: templates/boards/post.html:56
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/boards/post.html:58
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/boards/post.html:61
+msgid "Ban IP"
+msgstr "Заблокировать IP"
+
+#: templates/boards/post.html:74
+msgid "Replies"
+msgstr "Ответы"
+
+#: templates/boards/post.html:85 templates/boards/thread.html:74
+#: templates/boards/thread_gallery.html:59
+msgid "images"
+msgstr "изображений"
+
+#: templates/boards/post_admin.html:19
+msgid "Tags:"
+msgstr "Теги:"
+
+#: templates/boards/post_admin.html:30
+msgid "Add tag"
+msgstr "Добавить тег"
+
+#: templates/boards/posting_general.html:64
+msgid "Previous page"
+msgstr "Предыдущая страница"
+
+#: templates/boards/posting_general.html:77
+#, python-format
+msgid "Skipped %(count)s replies. Open thread to see all replies."
+msgstr "Пропущено %(count)s ответов. Откройте тред, чтобы увидеть все ответы."
+
+#: templates/boards/posting_general.html:100
+msgid "Next page"
+msgstr "Следующая страница"
+
+#: templates/boards/posting_general.html:105
+msgid "No threads exist. Create the first one!"
+msgstr "Нет тем. Создайте первую!"
+
+#: templates/boards/posting_general.html:111
+msgid "Create new thread"
+msgstr "Создать новую тему"
+
+#: templates/boards/posting_general.html:115 templates/boards/thread.html:50
+msgid "Post"
+msgstr "Отправить"
+
+#: templates/boards/posting_general.html:119
+msgid "Tags must be delimited by spaces. Text or image is required."
+msgstr ""
+"Теги должны быть разделены пробелами. Текст или изображение обязательны."
+
+#: templates/boards/posting_general.html:122 templates/boards/thread.html:54
+msgid "Text syntax"
+msgstr "Синтаксис текста"
+
+#: templates/boards/posting_general.html:132
+msgid "Pages:"
+msgstr "Страницы: "
+
+#: templates/boards/settings.html:14
+msgid "User:"
+msgstr "Пользователь:"
+
+#: templates/boards/settings.html:16
+msgid "You are moderator."
+msgstr "Вы модератор."
+
+#: templates/boards/settings.html:19
+msgid "Posts:"
+msgstr "Сообщений:"
+
+#: templates/boards/settings.html:20
+msgid "First access:"
+msgstr "Первый доступ:"
+
+#: templates/boards/settings.html:22
+msgid "Last access:"
+msgstr "Последний доступ: "
+
+#: templates/boards/settings.html:31
+msgid "Save"
+msgstr "Сохранить"
+
+#: templates/boards/tags.html:27
+msgid "No tags found."
+msgstr "Теги не найдены."
+
+#: templates/boards/thread.html:20 templates/boards/thread_gallery.html:21
+msgid "Normal mode"
+msgstr "Нормальный режим"
+
+#: templates/boards/thread.html:21 templates/boards/thread_gallery.html:22
+msgid "Gallery mode"
+msgstr "Режим галереи"
+
+#: templates/boards/thread.html:29
+msgid "posts to bumplimit"
+msgstr "сообщений до бамплимита"
+
+#: templates/boards/thread.html:44
+msgid "Reply to thread"
+msgstr "Ответить в тему"
+
+#: templates/boards/thread.html:73 templates/boards/thread_gallery.html:58
+msgid "replies"
+msgstr "ответов"
+
+#: templates/boards/thread.html:75 templates/boards/thread_gallery.html:60
+msgid "Last update: "
+msgstr "Последнее обновление: "
+
+#: templates/boards/rss/post.html:5
+msgid "Post image"
+msgstr "Изображение сообщения"
+
+#: templates/boards/staticpages/banned.html:6
+msgid "Banned"
+msgstr "Заблокирован"
+
+#: templates/boards/staticpages/banned.html:11
+msgid "Your IP address has been banned. Contact the administrator"
+msgstr "Ваш IP адрес был заблокирован. Свяжитесь с администратором"
+
+#: templates/boards/staticpages/help.html:6
+#: templates/boards/staticpages/help.html:10
+msgid "Syntax"
+msgstr "Синтаксис"
+
+#: templates/boards/staticpages/help.html:11
+msgid "2 line breaks for a new line."
+msgstr "2 перевода строки создают новый абзац."
+
+#: templates/boards/staticpages/help.html:12
+msgid "Italic text"
+msgstr "Курсивный текст"
+
+#: templates/boards/staticpages/help.html:13
+msgid "Bold text"
+msgstr "Полужирный текст"
+
+#: templates/boards/staticpages/help.html:14
+msgid "Spoiler"
+msgstr "Спойлер"
+
+#: templates/boards/staticpages/help.html:15
+msgid "Link to a post"
+msgstr "Ссылка на сообщение"
+
+#: templates/boards/staticpages/help.html:16
+msgid "Strikethrough text"
+msgstr "Зачеркнутый текст"
+
+#: templates/boards/staticpages/help.html:17
+msgid "You need to new line before:"
+msgstr "Перед этими тегами нужна новая строка:"
+
+#: templates/boards/staticpages/help.html:18
+msgid "Comment"
+msgstr "Комментарий"
+
+#: templates/boards/staticpages/help.html:19
+msgid "Quote"
+msgstr "Цитата"

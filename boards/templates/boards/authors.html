@@ -1,0 +1,32 @@
+{% extends "boards/base.html" %}
+
+{% load i18n %}
+
+{% block head %}
+    <title>{% trans "Authors" %}</title>
+{% endblock %}
+
+{% block content %}
+    <div class="post">
+        <p><img src="{{ STATIC_URL }}favicon.png" width="200" /></p>
+        <h2>{% trans 'Authors' %}</h2>
+        {% for nick, values in authors.items %}
+            <p>
+                <b>{{ nick }}</b> ({{ values.name }}):
+                {% for value in values.contacts %}
+                    <a href="mailto:{{ value }}">{{ value }}</a>
+                {% endfor %} -
+                {% for role in values.roles %}
+                    <span class="role">{% trans role %}</span>
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        {% endfor %}
+        <br />
+        <p>{% trans "Distributed under the" %}
+            <a href="http://www.gnu.org/licenses/gpl.html" >GNU GPLv3</a>
+            {% trans "license" %}</p>
+        <p><a href="https://bitbucket.org/neko259/neboard">
+            {% trans "Repository" %}</a></p>
+    </div>
+{% endblock %}

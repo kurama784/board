@@ -1,0 +1,38 @@
+{% extends "boards/base.html" %}
+
+{% load i18n %}
+{% load cache %}
+{% load static from staticfiles %}
+{% load board %}
+
+{% block head %}
+<title>#{{ post.id }} - {{ site_name }}</title>
+{% endblock %}
+
+{% block content %}
+    {% spaceless %}
+
+        {% post_view post moderator=moderator %}
+
+        {% if post.is_opening %}
+            <div class="post">
+                {% trans 'Tags:' %}
+                {% for tag in post.thread_new.get_tags %}
+                <a class="tag" href={% url 'tag' tag.name %}>#{{ tag.name }}</a>
+                <a href="?method=delete_tag&tag={{ tag.name }}">[X]</a>
+                    {% if not forloop.last %},{% endif %}
+                {% endfor %}
+                <div class="post-form-w">
+                <form id="form" enctype="multipart/form-data"
+                    method="post">{% csrf_token %}
+                    {{ tag_form.as_div }}
+                    <div class="form-submit">
+                        <input type="submit" value="{% trans "Add tag" %}"/>
+                    </div>
+                </form>
+                </div>
+            </div>
+        {% endif %}
+
+    {% endspaceless %}
+{% endblock %}

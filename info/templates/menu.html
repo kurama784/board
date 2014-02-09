@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!-- saved from url=(0024)http://anon.fm/menu.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    
+<link rel="stylesheet" type="text/css" href="fireworks.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/photon.css">
+<style type="text/css"></style></head><body style="overflow-x:hidden">
+
+ <div align="center">
+    
+
+<a href="info.html" id="radiologo" target="CONTENT"><img src="http://www.riku-industries.de/images/RIKU-Logo.jpg"></a>
+    
+    
+ </div>
+ 
+<p><div class="airlinks"><a href="#" target="CONTENT">PDA</a> | <a href="#" target="CONTENT">Android</a> | <a href="#" target="CONTENT">iPhone</a></div>
+   	 
+   </div>
+
+<div style="background:white;border:1px solid #ccc; border-radius:10px">
+<table border="0" width="100%"><tbody><tr>
+<td>Скорость постинга:</td><td>Размер базы:</td></tr>
+</tbody></table>
+
+<table border="0" width="100%"><tbody><tr>
+<td width="40%"><div id="bhd"><b>
+
+
+{% with ppd=posts_per_day|floatformat:2 %}
+<span style="background-color: #333; color: #00ff00; padding: 3px; border: 1px #eee dashed;">{{ ppd }}/д</span></b></div></td>
+{% endwith %}
+
+<td style="color:#996793;font-weight:bold">Посты</td>
+
+<td width="40%"><div id="rate"><span class="hurtbox" title="по количеству постов" style="color:rgb(255,255,0);background-color:rgb(51,51,0);border-color:white">{{ db_count }} п</span></div></td></tr>
+</tbody></table>
+
+<table border="0" width="100%">
+<tbody><tr><td colspan="3">
+</td></tr></tbody></table>
+</div>
+
+ <dl class="menu" id="menu">
+	    	
+	<dt>Меню</dt>
+	<dd><a href="/boards" target="CONTENT">Все треды</a></dd>
+	
+	<dt>Разделы</dt>
+	<dd><a href="/tag/бред" target="CONTENT">Бред</a></dd>
+	<dd><a href="/tag/истории" target="CONTENT">Истории</a></dd>
+	<dd><a href="/tag/аниме" target="CONTENT">Аниме</a></dd>
+	<dd><a href="/tag/учеба" target="CONTENT">Учеба</a></dd>
+	<dd><a href="/tag/творчество" target="CONTENT">Творчество</a></dd>
+	
+	<dt>Сервисы</dt>
+	<dd><a href="http://lurkmore.to/Имиджборда" target="CONTENT">Луркоморье</a></dd>
+    
+</dl>
+    
+
+
+<div id="fireworks-template">
+ <div id="fw" class="firework"></div>
+ <div id="fp" class="fireworkParticle"><img src="particles.gif" alt=""></div>
+</div>    
+</body></html>

@@ -1,0 +1,29 @@
+{% extends "boards/base.html" %}
+
+{% load i18n %}
+
+{% block head %}
+    <title>{% trans 'Login' %} - {{ site_name }}</title>
+{% endblock %}
+
+{% block content %}
+
+    <form enctype="multipart/form-data" method="post">
+    <div class="post-form-w">
+        <div class="post-form">
+            <div class="form-row">
+                <div class="form-label">{% trans 'User ID' %}</div>
+                <div class="form-input">{{ form.user_id }}</div>
+                <div class="form-errors">{{ form.user_id.errors }}</div>
+            </div>
+        </div>
+        <div class="form-submit">
+            <input type="submit" value="{% trans "Login" %}"/>
+        </div>
+        <div>
+            {% trans 'Insert your user id above' %}
+        </div>
+    </div>
+    </form>
+
+{% endblock %}
